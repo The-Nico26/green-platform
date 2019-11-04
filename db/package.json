@@ -1,0 +1,10 @@
+{
+	"name": "socket-app",
+	"version": "0.0.1",
+	"description": "First Socket App",
+	"dependancies": {},
+	"dependencies": {
+		"rethinkdb": "^2.3.3",
+		"json-socket": "^0.3.0"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "socket-app",
+	"version": "0.0.1",
+	"description": "First Socket App",
+	"dependancies": {},
+	"dependencies": {
+		"express": "^4.17.1",
+		"node-ipc": "^9.1.1",
+		"socket.io": "^2.3.0",
+		"uuid": "^3.3.3"
+	}
+}
