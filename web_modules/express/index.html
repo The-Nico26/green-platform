@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Loading...</title>
+        <script src="static/socket.io-client/socket.io.js"></script>
+        <script>
+            var socket = io(document.location.toString());
+            socket.on('html', (packet)=>{
+                data = packet.data;
+                console.log(packet)
+                //if(data.func){
+                  //  eval(data.func());
+                //}
+                document.getElementById('body').innerHTML = data.html;
+            })
+        </script>
+    </head>
+    <body id="body" class="load">
+        <style type="text/css"> @import url("static/style_load.css"); </style>
+        <svg width="200" height="200" viewBox="0 0 100 100">
+            <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+          </svg>
+    </body>
+</html>
