@@ -64,3 +64,4 @@ config.json
 package-lock.json
 
 /server.js
+/test*
