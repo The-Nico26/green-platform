@@ -30,8 +30,7 @@ server.on('connection', function(socket) {
         this.sendMessage({to: dt.to, from: dt.from, event:event, data:dt.data});
     }
 
-    socket.on('close', ()=>{
-    });
+    socket.on('close', ()=>{});
 
     socket.emit('initPlugin', {
         to: uuid,
