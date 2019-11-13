@@ -10,9 +10,12 @@ const { spawn } = require('child_process');
 var socket = new JsonSocket(new net.Socket());
 socket.connect(config.port_webhook, config.server_webhook);
 
+git.fetch();
+
 socket.on('connect', ()=>{
-    socket.sendMessage({'secret':config.secret});
+    socket.sendMessage({'secret':config.secret, 'type':'init', 'git':config.git});
     socket.on('message', (html)=>{
+        console.log("git checkout");
         git.checkout(config.branch).then(() => git.pull('origin', 'master', {'--rebase' : 'true'}))
     })
     socket.on('close', (message)=>{
@@ -20,5 +23,3 @@ socket.on('connect', ()=>{
         process.exit(0);
     })
 })
-
-console.log("Git is start")
