@@ -10,12 +10,6 @@ const { spawn } = require('child_process');
 var socket = new JsonSocket(new net.Socket());
 socket.connect(config.port_webhook, config.server_webhook);
 
-git.checkIsRepo()
-   .then(() => git.checkout(config.branch))
-   .then(() => git.fetch())
-   .then(() => spwan('nodemon', [config.module]));
-
-
 socket.on('connect', ()=>{
     socket.sendMessage({'secret':config.secret});
     socket.on('message', (html)=>{
@@ -27,3 +21,4 @@ socket.on('connect', ()=>{
     })
 })
 
+console.log("Git is start")

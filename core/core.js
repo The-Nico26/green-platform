@@ -5,6 +5,8 @@ var config = require('./config'),
     events = require('events'),
     uuidv4 = require('uuid/v4');
 
+    require('../git/git');
+
 var server = net.createServer();
 
 server.listen(config.netPort);

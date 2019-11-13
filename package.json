@@ -6,7 +6,6 @@
 		"express": "^4.17.1",
 		"json-socket": "^0.3.0",
 		"node-ipc": "^9.1.1",
-		"nodemon": "^1.19.4",
 		"nunjucks": "^3.2.0",
 		"rethinkdb": "^2.3.3",
 		"simple-git": "^1.126.0",

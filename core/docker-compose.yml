@@ -1,0 +1,10 @@
+version: '3'
+services:
+  core:
+    container_name: core
+    image: green-platform:0.1
+    working_dir: "/usr/src/app/core/"
+    volumes:
+    - "./config.json:/usr/src/app/core/config.json:ro"
+    - "../config.json:/usr/src/app/config.json:ro"
+    command: nodemon core
