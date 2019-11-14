@@ -12,7 +12,8 @@ socket.on('connect', ()=>{
     socket.sendMessage({'secret':config.secret, 'type':'init', 'git':config.git});
     socket.on('message', (html)=>{
         console.log(html);
-        git.pull();
+        git.pull()
+        .tags((err, tags) => console.log("Latest available tag: %s", tags.latest));
     })
     socket.on('close', (message)=>{
         console.log(message);
