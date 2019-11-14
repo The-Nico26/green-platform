@@ -8,4 +8,4 @@ services:
     volumes:
     - "./config.json:/usr/src/app/core/config.json:ro"
     - "../config.json:/usr/src/app/config.json:ro"
-    command: nodemon core
+    command: nodemon --watch ../* core
