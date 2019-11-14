@@ -5,7 +5,7 @@ var config = require('./config'),
     events = require('events'),
     uuidv4 = require('uuid/v4');
 
-    require('../git/git');
+    require('../git')
 
 var server = net.createServer();
 

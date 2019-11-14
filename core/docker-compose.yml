@@ -7,4 +7,5 @@ services:
     volumes:
     - "./config.json:/usr/src/app/core/config.json:ro"
     - "../config.json:/usr/src/app/config.json:ro"
+    - "../git.js:/usr/src/app/git.js:rw"
     command: nodemon core
