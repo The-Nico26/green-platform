@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./config').db;
 const net = require('net'),
       JsonSocket = require('json-socket'),
       events = require('events');
