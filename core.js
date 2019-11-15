@@ -1,18 +1,19 @@
-var config = require('./config'),
-    db_plugin = require('./db_plugin'),
+var config = require('./config').core,
     net = require('net'),
     JsonSocket = require('json-socket'),
     events = require('events'),
     uuidv4 = require('uuid/v4');
 
-require('../git');
+require('./git');
 
 var server = net.createServer();
 
 server.listen(config.netPort);
 console.log("Listen plugin SOCKET://"+config.netPort);
 var event = new events.EventEmitter();
-db_plugin.core = uuidv4().toString();
+var db_plugin = {
+    "core" :uuidv4().toString()
+}
 
 server.on('connection', function(socket) {
     socket = new JsonSocket(socket);
