@@ -1,21 +1,27 @@
-var config = require('./config').core,
+var config = require('./config'),
     net = require('net'),
     JsonSocket = require('json-socket'),
     events = require('events'),
     uuidv4 = require('uuid/v4');
+    const fs = require('fs')
 
-require('./git');
+if (fs.existsSync('./git.js')) {
+    //require('./git');
+}
 
 var server = net.createServer();
 
-server.listen(config.netPort);
-console.log("Listen plugin SOCKET://"+config.netPort);
+server.listen(config.netPort, '0.0.0.0', ()=>{
+    console.log("Listen ["+server.address().family+"] "+server.address().address+" -p "+config.netPort);
+});
 var event = new events.EventEmitter();
+
 var db_plugin = {
     "core" :uuidv4().toString()
 }
 
 server.on('connection', function(socket) {
+    console.log("Connection");
     socket = new JsonSocket(socket);
     uuid = uuidv4().toString();
     //Receive message => direction plugin concerné
@@ -26,7 +32,7 @@ server.on('connection', function(socket) {
             from: uuid,
             event: message.event,
             data: message.data
-        }) 
+        })
     });
     //Send message
     socket.emit = function(event, dt){

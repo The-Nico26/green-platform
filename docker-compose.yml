@@ -1,0 +1,46 @@
+version: '3'
+services:
+  core:
+    container_name: 'core'
+    image: node:alpine
+    working_dir: /usr/src/app/
+    volumes:
+      - ./core:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules:ro
+    command: ./node_modules/pm2/bin/pm2-runtime start src/core.js --watch
+
+  rethinkdb:
+    container_name: 'rethinkdb'
+    image: rethinkdb
+    ports:
+      - "8080:8080"
+    volumes:
+      - data:/data
+
+  db:
+    container_name: 'db'
+    image: node:alpine
+    working_dir: /usr/src/app/
+    volumes:
+      - ./db:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules:ro
+    command: ./node_modules/pm2/bin/pm2-runtime start src/db.js --watch
+    links:
+      - "rethinkdb"
+      - "core"
+
+  web:
+    container_name: 'web'
+    image: node:alpine
+    working_dir: /usr/src/app/
+    volumes:
+      - ./web:/usr/src/app/src
+      - ./node_modules:/usr/src/app/node_modules:ro
+    command: ./node_modules/pm2/bin/pm2-runtime src/web.js --watch
+    links:
+      - "core"
+    ports:
+      - "8082:8080"
+
+volumes:
+  data:

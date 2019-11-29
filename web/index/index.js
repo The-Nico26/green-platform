@@ -1,6 +1,8 @@
-const config = require('./config');
+const config = require('../config').modules.index;
 var ipc = require('node-ipc');
 var nunjucks = require('nunjucks');
+const fs = require('fs');
+
 nunjucks.configure({
     autoescape: true
 })
@@ -32,8 +34,8 @@ ipc.of.platform.on('url./', (packet, socket)=>{
         id: packet.id,
         data:{
             tag: '#body',
-            func: '',
-            html: nunjucks.render('index.html', {name: 'Nicolas'})
+            html: nunjucks.render(__dirname+'/src/index.html', {name: 'Nicolas'}),
+            javascript: fs.readFileSync(__dirname+'/src/index.js', 'utf8')
         }
     })
 })

@@ -1,0 +1,5 @@
+{
+    "name": "core",
+    "type": "pl_co",
+    "netPort": 8081
+}

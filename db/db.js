@@ -1,7 +1,13 @@
-const config = require('./config').db;
+const config = require('./config');
 const net = require('net'),
       JsonSocket = require('json-socket'),
       events = require('events');
+
+      const fs = require('fs')
+  
+if (fs.existsSync('./git.js')) {
+    //require('./git');
+}
 
 /**
  * INTER PLUGIN
@@ -24,7 +30,9 @@ socket.on('message', (message)=> {event.emit(
 socket.emit = function(event, dt){socket.sendMessage({to: dt.to, event:event, data:dt.data});}
 
 
-socket.on('connect', ()=>{});
+socket.on('connect', ()=>{
+    console.log("connection");
+});
 socket.on('close', ()=>{console.log('Server is disconnected');process.exit(0);})
 
 event.on('initPlugin', (packet)=>{
@@ -59,6 +67,7 @@ var connectionDB;
 
 r.connect({host: config.database.host, port:config.database.port}, function(err,conn){
     if(err)throw err;
+    console.log("Connection de la BD")
     connectionDB = conn;
     r.dbList().run(connectionDB, (err, res)=>{
         if(!res.includes(config.database.name)){

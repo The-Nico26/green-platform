@@ -1,0 +1,1 @@
+document.getElementById('body').classList.remove('load');

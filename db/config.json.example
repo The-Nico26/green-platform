@@ -1,0 +1,13 @@
+{
+    "name": "db",
+    "type":"pl_db",
+    "net":{
+        "host": "127.0.0.1",
+        "port": 8081
+    },
+    "database": {
+        "host": "127.0.0.1",
+        "port": 28015,
+        "name": "dbexample"
+    }
+}

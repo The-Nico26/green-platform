@@ -1,6 +1,6 @@
 var ipc = require('node-ipc');
 var uuidv4 = require('uuid/v4');
-const config = require('./config');
+const config = require('../config').modules.express;
 
 ipc.config.id = 'express';
 ipc.config.retry = 1500;
@@ -11,6 +11,7 @@ ipc.connectTo(
     ()=>{
         ipc.of.platform.on(
             'connect',()=>{
+                console.log("connect IPC Express")
                 ipc.of.platform.emit('init', {
                    name : config.name 
                 })
@@ -32,17 +33,25 @@ var io = require('socket.io');
 var app = express();
 
 var serverHttp = http.createServer(app);
-var ioListen = io.listen(serverHttp)
-serverHttp.listen(config.webPort, ()=>{
-  console.log("Module Core-Web is load");
+
+serverHttp.listen(config.webPort, '0.0.0.0', ()=>{
+  console.log("Web Interfaces: "+serverHttp.address().address+" -p "+config.webPort);
 });
 
-app.use('/static', express.static('../ressources'));
+var ioListen = io.listen(serverHttp)
 
-app.all(/[a-zA-Z0-9\/-]+/, (req, res)=>{
+app.use('/static', express.static('public'));
+
+app.all(/[a-zA-Z0-9\/-]+/, (req, res, next)=>{
     if(!(req.originalUrl.substr(0, 8) === '/static/'))
         res.sendFile(__dirname + '/index.html');
+    else
+        next()
 });
+app.get(/\/static\/.*/, (req, res, next)=>{
+    console.log("path: "+__dirname+req.originalUrl)
+    res.sendFile(__dirname+req.originalUrl);
+})
 
 
 ioListen.on('connection', function(socket){

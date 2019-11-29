@@ -7,10 +7,10 @@
             socket.on('html', (packet)=>{
                 data = packet.data;
                 console.log(packet)
-                //if(data.func){
-                  //  eval(data.func());
-                //}
                 document.getElementById('body').innerHTML = data.html;
+                if(data.javascript !== undefined){
+                    eval(data.javascript);
+                }
             })
         </script>
     </head>
