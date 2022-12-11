@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "First Socket App",
 	"dependencies": {
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"json-socket": "^0.3.0",
 		"node-ipc": "^9.1.1",
 		"nodemon": "^1.19.4",
